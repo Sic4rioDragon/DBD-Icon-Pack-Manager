@@ -1,0 +1,21 @@
+{
+  "platform": "steam",
+  "gamePaths": {
+    "steam": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dead by Daylight",
+    "epic": "C:\\Program Files\\Epic Games\\DeadByDaylight",
+    "custom": ""
+  },
+  "packFolders": [],
+  "backupFolder": "",
+  "installMode": "clean",
+  "selectedCategories": [
+    "CharPortraits",
+    "Emblems",
+    "Favors",
+    "ItemAddons",
+    "Items",
+    "Perks",
+    "Powers",
+    "StatusEffects"
+  ]
+}

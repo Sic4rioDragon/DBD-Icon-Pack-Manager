@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: file:;"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DBD Icon Pack Manager</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Dead by Daylight</p>
+        <h1>Icon Pack Manager</h1>
+        <p class="muted">Install local packs, mix folders, and restore your backup when needed.</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="saveConfigBtn" class="btn secondary">Save Config</button>
+        <button id="scanPacksBtn" class="btn">Scan Packs</button>
+      </div>
+    </header>
+
+    <section class="warning">
+      Icon modding is commonly done, but it still changes local game image files.
+      Use at your own risk. This app only copies image files and does not modify game code.
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2>Game Install Path</h2>
+            <p class="muted">Select where Dead by Daylight is installed.</p>
+          </div>
+          <button id="checkPathsBtn" class="btn small secondary">Check</button>
+        </div>
+
+        <div class="field">
+          <label>Default Platform</label>
+          <div class="radio-row">
+            <label>
+              <input type="radio" name="platform" value="steam" />
+              Steam
+            </label>
+            <label>
+              <input type="radio" name="platform" value="epic" />
+              Epic Games
+            </label>
+            <label>
+              <input type="radio" name="platform" value="custom" />
+              Custom
+            </label>
+          </div>
+        </div>
+
+        <div class="field with-button">
+          <label>Steam</label>
+          <input id="steamPathInput" type="text" />
+          <button id="browseSteamBtn" class="icon-btn">📁</button>
+        </div>
+
+        <div class="field with-button">
+          <label>Epic Games</label>
+          <input id="epicPathInput" type="text" />
+          <button id="browseEpicBtn" class="icon-btn">📁</button>
+        </div>
+
+        <div class="field with-button">
+          <label>Custom</label>
+          <input id="customPathInput" type="text" placeholder="Optional custom DBD install folder" />
+          <button id="browseCustomBtn" class="icon-btn">📁</button>
+        </div>
+
+        <div class="status-box" id="iconsPathStatus">Icons path not checked yet.</div>
+      </article>
+
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2>Local Packs</h2>
+            <p class="muted">Add the folders where you keep your downloaded icon packs.</p>
+          </div>
+          <button id="openPacksFolderBtn" class="btn small secondary">Open First</button>
+        </div>
+
+        <div class="note-box">
+          First time using this? Create a default backup before installing any pack.
+          You can download icon packs from nightlight.gg/packs and add the download folder here.
+        </div>
+
+        <div class="field">
+          <label>Pack Folders</label>
+          <div id="packFoldersList" class="folder-list"></div>
+        </div>
+
+        <div class="field with-button">
+          <label>Add Folder</label>
+          <input id="newPackFolderInput" type="text" placeholder="Add another local packs folder" />
+          <button id="browsePacksBtn" class="icon-btn">📁</button>
+        </div>
+
+        <div class="button-row folder-actions">
+          <button id="addPackFolderBtn" class="btn secondary">Add Pack Folder</button>
+        </div>
+
+        <div class="field with-button">
+          <label>Backup Folder</label>
+          <input id="backupFolderInput" type="text" />
+          <button id="browseBackupBtn" class="icon-btn">📁</button>
+        </div>
+
+        <div class="field">
+          <label>Install Mode</label>
+          <select id="installModeSelect">
+            <option value="clean">Clean install - restore backup first, then install pack</option>
+            <option value="merge">Merge - overwrite only selected pack files</option>
+          </select>
+        </div>
+
+        <div class="button-row">
+          <button id="createBackupBtn" class="btn secondary">Create Default Backup</button>
+          <button id="restoreBackupBtn" class="btn danger">Revert from Backup</button>
+          <button id="repairIconsBtn" class="btn secondary">Repair Missing Icons</button>
+        </div>
+
+        <div class="status-box" id="backupStatus">Backup not checked yet.</div>
+      </article>
+    </section>
+
+    <section class="grid packs-layout">
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2>Packs</h2>
+            <p class="muted">Pick a local pack to install.</p>
+          </div>
+          <span id="packsCountBadge" class="badge">0 packs</span>
+        </div>
+
+        <div id="packsList" class="packs-list">
+          <div class="empty">Scan your pack folders to begin.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2 id="selectedPackTitle">No pack selected</h2>
+            <p class="muted" id="selectedPackSubtitle">Select a pack from the list.</p>
+          </div>
+        </div>
+
+        <div class="category-toolbar">
+          <button id="selectAllCategoriesBtn" class="btn small secondary">Select All</button>
+          <button id="selectNoCategoriesBtn" class="btn small secondary">Select None</button>
+        </div>
+
+        <div id="categoriesList" class="categories-list">
+          <div class="empty">No categories loaded.</div>
+        </div>
+
+        <div class="preview-box" id="installPreview">Install preview will show here after you select a pack.</div>
+
+        <button id="installPackBtn" class="btn install" disabled>Install Selected Folders</button>
+
+        <div class="status-box log" id="actionLog">Ready.</div>
+      </article>
+    </section>
+  </main>
+
+  <script src="./src/renderer.js"></script>
+</body>
+</html>

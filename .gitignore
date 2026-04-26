@@ -1,0 +1,11 @@
+node_modules/
+dist/
+out/
+build/
+release/
+*.zip
+
+config.local.json
+
+.DS_Store
+Thumbs.db
