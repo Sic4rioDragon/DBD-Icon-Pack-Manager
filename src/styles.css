@@ -391,3 +391,246 @@ select:focus {
     flex-direction: column;
   }
 }
+.page-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.menu-app {
+  max-width: 1100px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.menu-card {
+  min-height: 230px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+}
+
+.menu-card h2 {
+  font-size: 24px;
+}
+
+.menu-settings {
+  margin-top: 16px;
+}
+
+.checkbox-line {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 700;
+  margin: 8px 0 14px;
+}
+
+.checkbox-line input {
+  width: auto;
+}
+
+.note-box {
+  background: #14151a;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 10px;
+  border-radius: 6px;
+  line-height: 1.45;
+  margin: 10px 0;
+}
+
+.compare-settings {
+  margin-bottom: 16px;
+}
+
+.compare-layout {
+  grid-template-columns: 420px 1fr;
+}
+
+.compare-items-list {
+  display: grid;
+  gap: 14px;
+  max-height: 640px;
+  overflow: auto;
+}
+
+.compare-category-group {
+  display: grid;
+  gap: 8px;
+}
+
+.compare-category-group h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.compare-item-buttons {
+  display: grid;
+  gap: 7px;
+}
+
+.compare-item-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.compare-item-btn:hover,
+.compare-item-btn.active {
+  border-color: var(--accent);
+  background: #17323a;
+}
+
+.compare-item-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compare-item-btn small {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.compare-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.compare-image-card {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.compare-image-wrap {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(45deg, #202127 25%, transparent 25%),
+    linear-gradient(-45deg, #202127 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #202127 75%),
+    linear-gradient(-45deg, transparent 75%, #202127 75%);
+  background-color: #111217;
+  background-size: 22px 22px;
+  background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.compare-image-wrap img {
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+}
+
+.compare-image-info {
+  display: grid;
+  gap: 3px;
+}
+
+.compare-image-info span,
+.compare-image-info small {
+  color: var(--muted);
+}
+
+.compare-card-actions {
+  justify-content: space-between;
+}
+
+@media (max-width: 1050px) {
+  .menu-grid,
+  .compare-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.compare-category-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  color: var(--text);
+  background: #14151a;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 800;
+  text-align: left;
+}
+
+.compare-category-header:hover {
+  border-color: var(--accent);
+  background: #17323a;
+}
+
+.compare-category-header small {
+  color: var(--muted);
+  font-weight: 700;
+}
+.hidden {
+  display: none !important;
+}
+
+.bulk-compare-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  background: #14151a;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 14px;
+}
+
+.compare-image-card.selected {
+  border-color: rgba(28, 149, 173, 0.75);
+  box-shadow: 0 0 0 1px rgba(28, 149, 173, 0.35);
+}
+
+.compare-card-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.compare-card-actions .btn {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.builder-card-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.builder-card-actions .btn {
+  padding-left: 8px;
+  padding-right: 8px;
+}

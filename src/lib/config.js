@@ -31,12 +31,17 @@ function getFallbackConfig() {
       custom: ""
     },
     packFolders: [],
+    compareFolder: "",
     backupFolder: "",
     installMode: "clean",
+    startupPage: "menu",
+    showMenuOnStartup: true,
     selectedCategories: [
+      "Actions",
       "CharPortraits",
       "Emblems",
       "Favors",
+      "HelpLoading",
       "ItemAddons",
       "Items",
       "Perks",
@@ -70,6 +75,15 @@ function mergeConfig(base, override) {
   };
 
   merged.packFolders = normalizePackFolders(merged);
+
+  if (!merged.startupPage) {
+    merged.startupPage = "menu";
+  }
+
+  if (typeof merged.showMenuOnStartup !== "boolean") {
+    merged.showMenuOnStartup = true;
+  }
+
   return merged;
 }
 
@@ -98,8 +112,14 @@ async function saveConfig(config) {
       custom: config.gamePaths?.custom || ""
     },
     packFolders: normalizePackFolders(config),
+    compareFolder: config.compareFolder || "",
     backupFolder: config.backupFolder || "",
     installMode: config.installMode || "clean",
+    startupPage: config.startupPage || "menu",
+    showMenuOnStartup:
+      typeof config.showMenuOnStartup === "boolean"
+        ? config.showMenuOnStartup
+        : true,
     selectedCategories: Array.isArray(config.selectedCategories)
       ? config.selectedCategories
       : []

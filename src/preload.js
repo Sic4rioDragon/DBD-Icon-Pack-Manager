@@ -17,5 +17,16 @@ contextBridge.exposeInMainWorld("dbdIconManager", {
   installPack: (payload) => ipcRenderer.invoke("install:pack", payload),
   repairIcons: (config) => ipcRenderer.invoke("icons:repair", config),
 
-  openFolder: (folderPath) => ipcRenderer.invoke("folder:open", folderPath)
+  scanCompareItems: (config) => ipcRenderer.invoke("compare:scan", config),
+  prepareCompareItem: (payload) => ipcRenderer.invoke("compare:prepare", payload),
+  deleteCompareEntry: (payload) => ipcRenderer.invoke("compare:delete-entry", payload),
+  keepCompareEntry: (payload) => ipcRenderer.invoke("compare:keep-entry", payload),
+  clearCompareCache: (config) => ipcRenderer.invoke("compare:clear-cache", config),
+
+  listBuilderPacks: (config) => ipcRenderer.invoke("builder:list-packs", config),
+  createBuilderPack: (payload) => ipcRenderer.invoke("builder:create-pack", payload),
+  addIconToPack: (payload) => ipcRenderer.invoke("builder:add-icon", payload),
+
+  openFolder: (folderPath) => ipcRenderer.invoke("folder:open", folderPath),
+  showFile: (filePath) => ipcRenderer.invoke("file:show", filePath),
 });

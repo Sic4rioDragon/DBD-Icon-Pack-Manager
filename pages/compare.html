@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: file:;"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compare Icons - DBD Icon Pack Manager</title>
+  <link rel="stylesheet" href="../src/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <nav class="page-nav">
+      <button class="btn secondary" data-go="../index.html">Main Menu</button>
+      <button class="btn secondary" data-go="./install.html">Install Packs</button>
+      <button class="btn secondary" data-go="./builder.html">Pack Builder</button>
+    </nav>
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DBD Icon Pack Manager</p>
+        <h1>Compare Icons</h1>
+        <p class="muted">
+          Compare the same PNG across different packs and delete the ones you do not want.
+        </p>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="saveCompareConfigBtn" class="btn secondary">Save Config</button>
+        <button id="compareScanBtn" class="btn">Scan All</button>
+      </div>
+    </header>
+
+    <section class="warning">
+      Delete moves the original PNG from that pack to the trash and removes the compare copy.
+      Keep only removes the compare copy. The original stays.
+    </section>
+
+    <section class="grid two compare-settings">
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2>Compare Setup</h2>
+            <p class="muted">The compare folder is where temporary comparison copies go.</p>
+          </div>
+        </div>
+
+        <div class="field with-button">
+          <label>Compare Folder</label>
+          <input id="compareFolderInput" type="text" placeholder="Defaults to your first pack folder\compare" />
+          <button id="browseCompareFolderBtn" class="icon-btn">📁</button>
+        </div>
+
+        <div class="button-row">
+          <button id="openCompareFolderBtn" class="btn secondary">Open Compare Folder</button>
+          <button id="compareClearBtn" class="btn secondary">Clear Selected</button>
+        </div>
+
+        <div class="note-box">
+          Scan All looks through all added pack folders. If the same PNG exists in more than one pack,
+          it becomes available for comparison.
+        </div>
+
+        <div class="status-box" id="compareStatus">No compare scan yet.</div>
+      </article>
+
+      <article class="card">
+        <h2>Pack Folders</h2>
+        <p class="muted">
+          These come from your saved config. Add or remove pack folders from the Install Packs page for now.
+        </p>
+
+        <div id="comparePackFoldersList" class="folder-list">
+          <div class="folder-empty">Loading folders...</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid compare-layout">
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2>Comparable Items</h2>
+            <p class="muted">Grouped by icon folder.</p>
+          </div>
+          <span id="compareCountBadge" class="badge">0 items</span>
+        </div>
+
+        <div id="compareItemsList" class="compare-items-list">
+          <div class="empty">Run Scan All to find matching icons.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <h2 id="compareSelectedTitle">No icon selected</h2>
+            <p class="muted" id="compareSelectedSubtitle">Pick an icon from the list.</p>
+          </div>
+        </div>
+
+        <div id="bulkCompareBar" class="bulk-compare-bar hidden">
+          <strong id="bulkSelectedCount">Selected: 0</strong>
+
+          <div class="button-row">
+            <button id="bulkDeleteBtn" class="btn small danger">Delete Selected</button>
+            <button id="bulkKeepBtn" class="btn small secondary">Keep Selected</button>
+            <button id="bulkClearBtn" class="btn small secondary">Clear Selection</button>
+          </div>
+        </div>
+
+        <div id="comparePreviewGrid" class="compare-preview-grid">
+          <div class="empty">Nothing selected yet.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="../src/pages/nav.js"></script>
+  <script src="../src/pages/compare.js"></script>
+</body>
+</html>

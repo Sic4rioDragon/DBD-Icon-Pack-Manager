@@ -6,12 +6,17 @@
     "custom": ""
   },
   "packFolders": [],
+  "compareFolder": "",
+  "startupPage": "menu",
+  "showMenuOnStartup": true,
   "backupFolder": "",
   "installMode": "clean",
   "selectedCategories": [
+    "Actions",
     "CharPortraits",
     "Emblems",
     "Favors",
+    "HelpLoading",
     "ItemAddons",
     "Items",
     "Perks",

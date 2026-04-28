@@ -8,6 +8,11 @@ const {
 } = require("./paths");
 
 const KNOWN_CATEGORY_ALIASES = {
+  Actions: [
+    "Actions",
+    "Action"
+  ],
+
   CharPortraits: [
     "CharPortraits",
     "CharacterPortraits",
@@ -27,6 +32,13 @@ const KNOWN_CATEGORY_ALIASES = {
     "Favour",
     "Offerings",
     "Offering"
+  ],
+
+    HelpLoading: [
+    "HelpLoading",
+    "Help Loading",
+    "Loading",
+    "LoadingScreens"
   ],
 
   ItemAddons: [

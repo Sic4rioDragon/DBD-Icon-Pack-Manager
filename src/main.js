@@ -25,6 +25,39 @@ const {
 } = require("./lib/backup");
 
 const {
+  scanCompareItems,
+  prepareCompareItem,
+  deleteCompareEntry,
+  keepCompareEntry,
+  clearCompareCache
+} = require("./lib/compare");
+
+let builderTools = null;
+
+try {
+  builderTools = require("./lib/pack-builder");
+} catch {
+  builderTools = {
+    listBuilderPacks: async () => ({
+      ok: false,
+      message: "Pack Builder is not included in this build.",
+      roots: [],
+      packs: []
+    }),
+
+    createBuilderPack: async () => ({
+      ok: false,
+      message: "Pack Builder is not included in this build."
+    }),
+
+    addIconToPack: async () => ({
+      ok: false,
+      message: "Pack Builder is not included in this build."
+    })
+  };
+}
+
+const {
   installPack,
   validateAndRepairIcons
 } = require("./lib/installer");
@@ -100,6 +133,16 @@ ipcMain.handle("paths:check", async (_event, config) => {
   };
 });
 
+ipcMain.handle("file:show", async (_event, filePath) => {
+  if (!filePath) {
+    return { ok: false, message: "No file path provided." };
+  }
+
+  shell.showItemInFolder(filePath);
+
+  return { ok: true };
+});
+
 ipcMain.handle("packs:scan", async (_event, packFolders) => {
   const folders = Array.isArray(packFolders)
     ? packFolders.filter(Boolean)
@@ -165,6 +208,43 @@ ipcMain.handle("install:pack", async (_event, payload) => {
 
 ipcMain.handle("icons:repair", async (_event, config) => {
   return await validateAndRepairIcons(config);
+});
+
+ipcMain.handle("compare:scan", async (_event, config) => {
+  return await scanCompareItems(config);
+});
+
+ipcMain.handle("compare:clear-cache", async (_event, config) => {
+  return await clearCompareCache(config);
+});
+
+ipcMain.handle("compare:prepare", async (_event, payload) => {
+  return await prepareCompareItem(payload.config, payload.category, payload.fileName);
+});
+
+ipcMain.handle("compare:delete-entry", async (_event, payload) => {
+  return await deleteCompareEntry({
+    ...payload,
+    trashFile: async (filePath) => {
+      await shell.trashItem(filePath);
+    }
+  });
+});
+
+ipcMain.handle("compare:keep-entry", async (_event, payload) => {
+  return await keepCompareEntry(payload);
+});
+
+ipcMain.handle("builder:list-packs", async (_event, config) => {
+  return await builderTools.listBuilderPacks(config);
+});
+
+ipcMain.handle("builder:create-pack", async (_event, payload) => {
+  return await builderTools.createBuilderPack(payload);
+});
+
+ipcMain.handle("builder:add-icon", async (_event, payload) => {
+  return await builderTools.addIconToPack(payload);
 });
 
 ipcMain.handle("folder:open", async (_event, folderPath) => {

@@ -2,7 +2,7 @@
 
 Small local icon pack manager for Dead by Daylight.
 
-It installs local icon packs you already have, lets you mix only the folders you want, and keeps a backup around so you can revert if needed.
+It installs local icon packs you already have, lets you mix only the folders you want, compares icons across packs, and keeps a backup around so you can revert if needed.
 
 This project is not affiliated with Behaviour Interactive, Dead by Daylight, or NightLight.
 
@@ -16,6 +16,8 @@ This project is not affiliated with Behaviour Interactive, Dead by Daylight, or 
 - Creates a default backup from your own DBD install
 - Reverts from that backup
 - Repairs missing icons from the backup
+- Compares matching PNG files across different packs
+- Lets you keep or delete icon versions while comparing
 
 ## Getting packs
 
@@ -25,7 +27,7 @@ You can download packs from:
 
 ```txt
 https://nightlight.gg/packs
-```
+````
 
 After downloading/extracting a pack, add the folder that contains your packs in the app.
 
@@ -38,6 +40,52 @@ Create Default Backup
 ```
 
 That saves your current DBD icon folder. The revert and repair buttons use that backup.
+
+## Install Packs
+
+The install page lets you:
+
+* Add one or more pack folders
+* Scan local packs
+* Select a pack
+* Pick which icon folders should be installed
+* Preview how many files will be copied
+* Install in clean or merge mode
+
+## Compare Icons
+
+The compare page scans all added pack folders and finds PNG files with the same name.
+
+Example:
+
+```txt
+S41_SableWard_Portrait.png
+```
+
+If that file exists in multiple packs, the app shows each version side by side.
+
+### Keep
+
+Keeps the original file in the pack and removes only the temporary compare copy.
+
+### Delete
+
+Deletes the temporary compare copy and also deletes the original PNG from that pack.
+
+Delete is destructive, so the app asks for confirmation first.
+
+## Pack Builder
+
+Pack Builder is in dev right now and is not part of the stable v0.0.1 flow yet.
+
+The idea is:
+
+- Pick icons from downloaded packs
+- Copy selected icons into an existing pack
+- Create a new local pack
+- Build a custom merged pack without deleting anything from the source packs
+
+For now, Compare Icons is the safer tool for sorting through packs.
 
 ## Local config
 
@@ -62,12 +110,17 @@ Example:
   "packFolders": [
     "D:\\Documents\\deadbydaylight\\packs"
   ],
+  "compareFolder": "",
   "backupFolder": "",
   "installMode": "clean",
+  "startupPage": "menu",
+  "showMenuOnStartup": true,
   "selectedCategories": [
+    "Actions",
     "CharPortraits",
     "Emblems",
     "Favors",
+    "HelpLoading",
     "ItemAddons",
     "Items",
     "Perks",
@@ -77,14 +130,22 @@ Example:
 }
 ```
 
-## Supported pack folders
-
-The app looks for the same sort of icon folders NightLight-style packs normally use:
+If `compareFolder` is empty, the app uses:
 
 ```txt
+<first pack folder>\compare
+```
+
+## Supported pack folders
+
+The app looks for these icon folders:
+
+```txt
+Actions
 CharPortraits
 Emblems
 Favors
+HelpLoading
 ItemAddons
 Items
 Perks
@@ -101,8 +162,10 @@ Both of these work:
 ```txt
 My Pack
 └─ Icons
+   ├─ Actions
    ├─ CharPortraits
    ├─ Favors
+   ├─ HelpLoading
    ├─ ItemAddons
    ├─ Items
    ├─ Perks
@@ -112,14 +175,18 @@ My Pack
 
 ```txt
 My Pack
+├─ Actions
 ├─ CharPortraits
 ├─ Favors
+├─ HelpLoading
 ├─ ItemAddons
 ├─ Items
 ├─ Perks
 ├─ Powers
 └─ StatusEffects
 ```
+
+Nested folders inside those categories also work.
 
 ## Install modes
 
@@ -153,4 +220,16 @@ npm start
 
 Icon modding is commonly done, but it still changes local game image files.
 
-Use at your own risk. This app only copies image files and does not modify game code.
+Use at your own risk. This app only copies or deletes image files and does not modify game code.
+
+````
+
+---
+
+After this, the error should be gone because this file will exist:
+
+```txt
+pages/install.html
+````
+
+And the compare page buttons should work because they are no longer using blocked inline `onclick`.

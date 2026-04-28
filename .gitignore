@@ -6,6 +6,12 @@ release/
 *.zip
 
 config.local.json
+package-lock.json
 
 .DS_Store
 Thumbs.db
+
+# Pack Builder is still in dev
+pages/builder.html
+src/pages/builder.js
+src/lib/pack-builder.js
