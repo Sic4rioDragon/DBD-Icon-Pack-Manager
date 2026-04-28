@@ -221,15 +221,3 @@ npm start
 Icon modding is commonly done, but it still changes local game image files.
 
 Use at your own risk. This app only copies or deletes image files and does not modify game code.
-
-````
-
----
-
-After this, the error should be gone because this file will exist:
-
-```txt
-pages/install.html
-````
-
-And the compare page buttons should work because they are no longer using blocked inline `onclick`.
